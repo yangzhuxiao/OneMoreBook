@@ -28,7 +28,7 @@
         _authorsArray = [resultsArray valueForKey:@"bookAuthor"];
         _imageArray = [resultsArray valueForKey:@"bookImage"];
         
-//        [self.searchDisplayController.searchResultsTableView reloadData];
+        [self.searchDisplayController.searchResultsTableView reloadData];
     }];
 }
 
