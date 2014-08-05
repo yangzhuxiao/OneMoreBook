@@ -17,7 +17,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tabBarItem.title = @"我的书";
+    self.tabBarItem.title = @"MyBooks";
     _booksArray = [NSArray array];
 }
 
@@ -45,36 +45,36 @@
 {
     static NSString *cellIdentifier = @"CustomCell";
     
-    
-    NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:self options:nil];
-    if (nibs.count > 0)
+    UINib *nib = [UINib nibWithNibName:@"CustomCell" bundle:nil];
+
+    if (nib)
     {
-        [tableView registerNib:nibs[0] forCellReuseIdentifier:cellIdentifier];
+        [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
     }
     
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        
+        cell = [[CustomCell alloc] init];
+    }
     
-    NSString *bookTitle = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookTitle"];
-//    NSString *bookAuthor = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookAuthor"];
-    NSString *bookImage = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookImage"];
+    cell.bookTitle.text = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookTitle"];
+    cell.bookTitle.text = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookAuthor"];
 
-    if (bookTitle)
-    {
-        cell.bookTitle.text = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookTitle"];
-    }
-//    if (bookAuthor)
-//    {
-//        cell.bookAuthor.text = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookAuthor"];
-//    }
-    if (bookImage)
-    {
-        NSString *imageURL = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookImage"];
-        UIImage *image = [UIImage imageWithContentsOfFile:imageURL];
-        cell.bookImage = [[UIImageView alloc] initWithImage:image];
-    }
+    NSString *imagePath = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookImage"];
+    NSURL *imageURL = [NSURL URLWithString:imagePath];
+    
+    [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
     
     return cell;
 }
+
+#pragma mark - UITableViewDelegate Methods
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0;
+}
+
 #pragma mark - UISearchDisplayDelegate medhods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
