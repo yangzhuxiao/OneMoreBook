@@ -14,7 +14,7 @@
 + (void)searchBook:(NSString *)searchString WithResults:(void (^)(NSArray * resultsArray))resultsBlock;
 
 @property (nonatomic, copy) NSArray *bookAuthor;
-@property (nonatomic, copy) NSArray *bookTitle;
-@property (nonatomic, copy) NSArray *bookImage;
+@property (nonatomic, copy) NSString *bookTitle;
+@property (nonatomic, copy) NSString *bookImage;
 
 @end

@@ -10,8 +10,6 @@
 
 @interface IngViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
 
-@property (nonatomic, copy) NSArray *titlesArray;
-@property (nonatomic, copy) NSArray *authorsArray;
-@property (nonatomic, copy) NSArray *imageArray;
+@property (nonatomic, copy) NSArray *booksArray;
 
 @end

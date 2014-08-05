@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IngViewController.h"
+#import "DoubanViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,8 +21,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    IngViewController *viewController = [[IngViewController alloc] init];
-    self.window.rootViewController = viewController;
+    IngViewController *ingController = [[IngViewController alloc] init];
+    DoubanViewController *loginController = [[DoubanViewController alloc] init];
+    
+    UITabBarController *tabController = [[UITabBarController alloc] init];
+    [tabController setViewControllers:[NSArray arrayWithObjects:loginController, ingController, nil] animated:YES];
+
+    self.window.rootViewController = tabController;
+
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

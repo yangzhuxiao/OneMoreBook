@@ -14,25 +14,27 @@
 {
     RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[SearchViaDoubanAPI class]];
     
-    [mapping addAttributeMappingsFromDictionary:@{@"books.author": @"bookAuthor",
-                                                  @"books.title": @"bookTitle",
-                                                  @"books.image": @"bookImage"
-                                                  }];
+//    [mapping addAttributeMappingsFromDictionary:@{@"books.author": @"bookAuthor",
+//                                                  @"books.title": @"bookTitle",
+//                                                  @"books.image": @"bookImage"
+//                                                  }];
+//    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:mapping method:RKRequestMethodAny pathPattern:nil keyPath:nil statusCodes:nil];
     
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:mapping method:RKRequestMethodAny pathPattern:nil keyPath:nil statusCodes:nil];
+    
+
+    [mapping addAttributeMappingsFromDictionary:@{@"author": @"bookAuthor",
+                                                  @"title": @"bookTitle",
+                                                  @"image": @"bookImage"}];
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:mapping method:RKRequestMethodAny pathPattern:nil keyPath:@"books" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
     
     NSString *urlString = [searchString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
     [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        /*
-         NSLog(@"mappingResult.array.count: %d", mappingResult.array.count);
-         NSLog(@"bookAuthor: %@", [mappingResult.array[0] valueForKey:@"bookAuthor"]);
-         NSLog(@"bookTitle: %@", [mappingResult.array[0] valueForKey:@"bookTitle"]);
-         NSLog(@"bookImage: %@", [mappingResult.array[0] valueForKey:@"bookImage"]);
-         */
-        resultsBlock(mappingResult.array[0]);
+        NSArray *array = mappingResult.array;
+        resultsBlock(mappingResult.array);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"Shit, Searching failed...");
     }];
