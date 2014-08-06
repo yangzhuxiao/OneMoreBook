@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BookInfo.h"
 
 @interface IngViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
 
-@property (nonatomic, copy) NSArray *booksArray;
+@property (nonatomic, copy) NSMutableArray *booksArray;
+@property (nonatomic, strong) BookInfo *selectedBook;
 
 @end

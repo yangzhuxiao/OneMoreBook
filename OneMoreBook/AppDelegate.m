@@ -22,10 +22,11 @@
     // Override point for customization after application launch.
     
     IngViewController *ingController = [[IngViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ingController];
     DoubanViewController *loginController = [[DoubanViewController alloc] init];
     
     UITabBarController *tabController = [[UITabBarController alloc] init];
-    [tabController setViewControllers:[NSArray arrayWithObjects:loginController, ingController, nil] animated:YES];
+    [tabController setViewControllers:[NSArray arrayWithObjects:loginController, nav, nil] animated:YES];
 
     self.window.rootViewController = tabController;
 
