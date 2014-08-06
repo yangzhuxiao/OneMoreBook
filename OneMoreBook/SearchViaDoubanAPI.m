@@ -12,11 +12,13 @@
 
 + (void)searchBook:(NSString *)searchString WithResults:(void (^)(NSArray * resultsArray))resultsBlock
 {
+    
     RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[SearchViaDoubanAPI class]];
     
 
     [mapping addAttributeMappingsFromDictionary:@{@"title": @"bookTitle",
-                                                  @"image": @"bookImage"}];
+                                                  @"image": @"bookImage",
+                                                  @"author": @"bookAuthor"}];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:mapping method:RKRequestMethodAny pathPattern:nil keyPath:@"books" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
@@ -25,7 +27,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
     [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-//        NSArray *array = mappingResult.array;
+        NSArray *array = mappingResult.array;
         resultsBlock(mappingResult.array);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"Shit, Searching failed...");

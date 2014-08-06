@@ -59,11 +59,14 @@
     }
     
     cell.bookTitle.text = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookTitle"];
-    cell.bookTitle.text = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookAuthor"];
 
+    NSArray *bookAuthorArray = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookAuthor"];
+//    NSString *author1 = [bookAuthorArray objectAtIndex:0];//若bookAuthorArray为empty时会报错！！！
+    NSString *authorAll = [bookAuthorArray componentsJoinedByString:@" "];
+    cell.bookAuthor.text = authorAll;
+    
     NSString *imagePath = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookImage"];
     NSURL *imageURL = [NSURL URLWithString:imagePath];
-    
     [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
     
     return cell;
