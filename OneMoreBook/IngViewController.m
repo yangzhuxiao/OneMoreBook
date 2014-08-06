@@ -63,12 +63,18 @@
     NSArray *bookAuthorArray = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookAuthor"];
 //    NSString *author1 = [bookAuthorArray objectAtIndex:0];//若bookAuthorArray为empty时会报错！！！
     NSString *authorAll = [bookAuthorArray componentsJoinedByString:@" "];
-    cell.bookAuthor.text = authorAll;
-    
+    NSString *authorPref = @"作者：";
+    cell.bookAuthor.text = [authorPref stringByAppendingString:authorAll];
+
     NSString *imagePath = [[_booksArray objectAtIndex:indexPath.row] valueForKey:@"bookImage"];
+    //方式一：Ios自己的类来实现
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]];
+    cell.bookImage.image = [UIImage imageWithData:data];
+    //方式二：restkit中AFNetworking库中的方法
+/*    
     NSURL *imageURL = [NSURL URLWithString:imagePath];
     [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
-    
+*/
     return cell;
 }
 
