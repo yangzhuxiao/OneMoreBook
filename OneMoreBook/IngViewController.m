@@ -20,7 +20,9 @@
     // Do any additional setup after loading the view.
     self.tabBarItem.title = @"MyBooks";
     self.navigationItem.title = @"正在读的书";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchDisplayController:shouldReloadTableForSearchString:)];
+    
+    //TO BE DONE...
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchDisplayController:shouldReloadTableForSearchString:)];
     _booksArray = [NSMutableArray array];
     _selectedBook = [[BookInfo alloc] init];
 }

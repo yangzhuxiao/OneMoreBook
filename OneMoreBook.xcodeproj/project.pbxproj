@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		541CBB2FAD4249A7A101E4FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 559774BF1DB54E8B8FB7906E /* libPods.a */; };
+		9708693A1993CCA900009AA8 /* BookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9708692F1993CCA900009AA8 /* BookInfo.m */; };
+		9708693B1993CCA900009AA8 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869311993CCA900009AA8 /* CustomCell.m */; };
+		9708693C1993CCA900009AA8 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970869321993CCA900009AA8 /* CustomCell.xib */; };
+		9708693D1993CCA900009AA8 /* DoubanAuthorize.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869341993CCA900009AA8 /* DoubanAuthorize.m */; };
+		9708693E1993CCA900009AA8 /* DoubanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869371993CCA900009AA8 /* DoubanRequest.m */; };
+		9708693F1993CCA900009AA8 /* DoubanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869391993CCA900009AA8 /* DoubanViewController.m */; };
+		970869431993CD0B00009AA8 /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869411993CD0B00009AA8 /* BookDetailViewController.m */; };
+		970869441993CD0B00009AA8 /* BookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970869421993CD0B00009AA8 /* BookDetailViewController.xib */; };
 		9752DE451982596B00407F5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752DE441982596B00407F5B /* main.m */; };
 		9752DE481982596B00407F5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752DE471982596B00407F5B /* AppDelegate.m */; };
 		9752DE4A1982596B00407F5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9752DE491982596B00407F5B /* Images.xcassets */; };
@@ -44,6 +52,21 @@
 /* Begin PBXFileReference section */
 		4F740119E52E48CE8321D147 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		559774BF1DB54E8B8FB7906E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9708692E1993CCA900009AA8 /* BookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfo.h; sourceTree = "<group>"; };
+		9708692F1993CCA900009AA8 /* BookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfo.m; sourceTree = "<group>"; };
+		970869301993CCA900009AA8 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		970869311993CCA900009AA8 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		970869321993CCA900009AA8 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		970869331993CCA900009AA8 /* DoubanAuthorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanAuthorize.h; sourceTree = "<group>"; };
+		970869341993CCA900009AA8 /* DoubanAuthorize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubanAuthorize.m; sourceTree = "<group>"; };
+		970869351993CCA900009AA8 /* DoubanHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanHeaders.h; sourceTree = "<group>"; };
+		970869361993CCA900009AA8 /* DoubanRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanRequest.h; sourceTree = "<group>"; };
+		970869371993CCA900009AA8 /* DoubanRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubanRequest.m; sourceTree = "<group>"; };
+		970869381993CCA900009AA8 /* DoubanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanViewController.h; sourceTree = "<group>"; };
+		970869391993CCA900009AA8 /* DoubanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubanViewController.m; sourceTree = "<group>"; };
+		970869401993CD0B00009AA8 /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
+		970869411993CD0B00009AA8 /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		970869421993CD0B00009AA8 /* BookDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailViewController.xib; sourceTree = "<group>"; };
 		9752DE3F1982596B00407F5B /* OneMoreBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneMoreBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9752DE431982596B00407F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9752DE441982596B00407F5B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,6 +140,21 @@
 				9752DE5F19825CD300407F5B /* IngViewController.h */,
 				9752DE6019825CD300407F5B /* IngViewController.m */,
 				9752DE62198287D800407F5B /* IngViewController.xib */,
+				970869401993CD0B00009AA8 /* BookDetailViewController.h */,
+				970869411993CD0B00009AA8 /* BookDetailViewController.m */,
+				970869421993CD0B00009AA8 /* BookDetailViewController.xib */,
+				9708692E1993CCA900009AA8 /* BookInfo.h */,
+				9708692F1993CCA900009AA8 /* BookInfo.m */,
+				970869301993CCA900009AA8 /* CustomCell.h */,
+				970869311993CCA900009AA8 /* CustomCell.m */,
+				970869321993CCA900009AA8 /* CustomCell.xib */,
+				970869331993CCA900009AA8 /* DoubanAuthorize.h */,
+				970869341993CCA900009AA8 /* DoubanAuthorize.m */,
+				970869351993CCA900009AA8 /* DoubanHeaders.h */,
+				970869361993CCA900009AA8 /* DoubanRequest.h */,
+				970869371993CCA900009AA8 /* DoubanRequest.m */,
+				970869381993CCA900009AA8 /* DoubanViewController.h */,
+				970869391993CCA900009AA8 /* DoubanViewController.m */,
 				9752DE491982596B00407F5B /* Images.xcassets */,
 				9752DE421982596B00407F5B /* Supporting Files */,
 			);
@@ -232,7 +270,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9708693C1993CCA900009AA8 /* CustomCell.xib in Resources */,
 				9752DE4A1982596B00407F5B /* Images.xcassets in Resources */,
+				970869441993CD0B00009AA8 /* BookDetailViewController.xib in Resources */,
 				9752DE63198287D800407F5B /* IngViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +325,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				97770ABD1984A3E70057CDFA /* SearchViaDoubanAPI.m in Sources */,
+				9708693D1993CCA900009AA8 /* DoubanAuthorize.m in Sources */,
 				9752DE481982596B00407F5B /* AppDelegate.m in Sources */,
+				9708693B1993CCA900009AA8 /* CustomCell.m in Sources */,
+				9708693E1993CCA900009AA8 /* DoubanRequest.m in Sources */,
+				9708693F1993CCA900009AA8 /* DoubanViewController.m in Sources */,
+				970869431993CD0B00009AA8 /* BookDetailViewController.m in Sources */,
 				9752DE6119825CD300407F5B /* IngViewController.m in Sources */,
+				9708693A1993CCA900009AA8 /* BookInfo.m in Sources */,
 				9752DE451982596B00407F5B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

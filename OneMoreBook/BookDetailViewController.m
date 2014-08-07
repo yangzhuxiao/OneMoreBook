@@ -10,6 +10,12 @@
 
 @implementation BookDetailViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
