@@ -16,6 +16,7 @@
 		9708693F1993CCA900009AA8 /* DoubanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869391993CCA900009AA8 /* DoubanViewController.m */; };
 		970869431993CD0B00009AA8 /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970869411993CD0B00009AA8 /* BookDetailViewController.m */; };
 		970869441993CD0B00009AA8 /* BookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970869421993CD0B00009AA8 /* BookDetailViewController.xib */; };
+		971FE0D6199641AC00E10C1D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971FE0D5199641AC00E10C1D /* CoreData.framework */; };
 		9752DE451982596B00407F5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752DE441982596B00407F5B /* main.m */; };
 		9752DE481982596B00407F5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752DE471982596B00407F5B /* AppDelegate.m */; };
 		9752DE4A1982596B00407F5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9752DE491982596B00407F5B /* Images.xcassets */; };
@@ -67,6 +68,7 @@
 		970869401993CD0B00009AA8 /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
 		970869411993CD0B00009AA8 /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
 		970869421993CD0B00009AA8 /* BookDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailViewController.xib; sourceTree = "<group>"; };
+		971FE0D5199641AC00E10C1D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9752DE3F1982596B00407F5B /* OneMoreBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneMoreBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9752DE431982596B00407F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9752DE441982596B00407F5B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				971FE0D6199641AC00E10C1D /* CoreData.framework in Frameworks */,
 				541CBB2FAD4249A7A101E4FF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,9 +108,56 @@
 		6FC3A61E47A14E198415F2DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				971FE0D5199641AC00E10C1D /* CoreData.framework */,
 				559774BF1DB54E8B8FB7906E /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		971FE0D1199640B200E10C1D /* Douban */ = {
+			isa = PBXGroup;
+			children = (
+				970869331993CCA900009AA8 /* DoubanAuthorize.h */,
+				970869341993CCA900009AA8 /* DoubanAuthorize.m */,
+				970869351993CCA900009AA8 /* DoubanHeaders.h */,
+				970869361993CCA900009AA8 /* DoubanRequest.h */,
+				970869371993CCA900009AA8 /* DoubanRequest.m */,
+				970869381993CCA900009AA8 /* DoubanViewController.h */,
+				970869391993CCA900009AA8 /* DoubanViewController.m */,
+			);
+			name = Douban;
+			sourceTree = "<group>";
+		};
+		971FE0D2199640C200E10C1D /* DetailController */ = {
+			isa = PBXGroup;
+			children = (
+				970869401993CD0B00009AA8 /* BookDetailViewController.h */,
+				970869411993CD0B00009AA8 /* BookDetailViewController.m */,
+				970869421993CD0B00009AA8 /* BookDetailViewController.xib */,
+			);
+			name = DetailController;
+			sourceTree = "<group>";
+		};
+		971FE0D3199640D000E10C1D /* ReadingController */ = {
+			isa = PBXGroup;
+			children = (
+				9752DE5F19825CD300407F5B /* IngViewController.h */,
+				9752DE6019825CD300407F5B /* IngViewController.m */,
+				9752DE62198287D800407F5B /* IngViewController.xib */,
+				970869301993CCA900009AA8 /* CustomCell.h */,
+				970869311993CCA900009AA8 /* CustomCell.m */,
+				970869321993CCA900009AA8 /* CustomCell.xib */,
+			);
+			name = ReadingController;
+			sourceTree = "<group>";
+		};
+		971FE0D41996410E00E10C1D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9708692E1993CCA900009AA8 /* BookInfo.h */,
+				9708692F1993CCA900009AA8 /* BookInfo.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		9752DE361982596B00407F5B = {
@@ -137,24 +187,10 @@
 				9752DE471982596B00407F5B /* AppDelegate.m */,
 				97770ABB1984A3E70057CDFA /* SearchViaDoubanAPI.h */,
 				97770ABC1984A3E70057CDFA /* SearchViaDoubanAPI.m */,
-				9752DE5F19825CD300407F5B /* IngViewController.h */,
-				9752DE6019825CD300407F5B /* IngViewController.m */,
-				9752DE62198287D800407F5B /* IngViewController.xib */,
-				970869401993CD0B00009AA8 /* BookDetailViewController.h */,
-				970869411993CD0B00009AA8 /* BookDetailViewController.m */,
-				970869421993CD0B00009AA8 /* BookDetailViewController.xib */,
-				9708692E1993CCA900009AA8 /* BookInfo.h */,
-				9708692F1993CCA900009AA8 /* BookInfo.m */,
-				970869301993CCA900009AA8 /* CustomCell.h */,
-				970869311993CCA900009AA8 /* CustomCell.m */,
-				970869321993CCA900009AA8 /* CustomCell.xib */,
-				970869331993CCA900009AA8 /* DoubanAuthorize.h */,
-				970869341993CCA900009AA8 /* DoubanAuthorize.m */,
-				970869351993CCA900009AA8 /* DoubanHeaders.h */,
-				970869361993CCA900009AA8 /* DoubanRequest.h */,
-				970869371993CCA900009AA8 /* DoubanRequest.m */,
-				970869381993CCA900009AA8 /* DoubanViewController.h */,
-				970869391993CCA900009AA8 /* DoubanViewController.m */,
+				971FE0D3199640D000E10C1D /* ReadingController */,
+				971FE0D2199640C200E10C1D /* DetailController */,
+				971FE0D41996410E00E10C1D /* Model */,
+				971FE0D1199640B200E10C1D /* Douban */,
 				9752DE491982596B00407F5B /* Images.xcassets */,
 				9752DE421982596B00407F5B /* Supporting Files */,
 			);
