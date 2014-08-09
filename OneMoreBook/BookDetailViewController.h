@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <UIImageView+AFNetworking.h>
+#import <CoreData/CoreData.h>
 
 @interface BookDetailViewController : UIViewController
 
 @property (nonatomic, copy) NSString *titleString;
 @property (nonatomic, copy) NSString *authorString;
 @property (nonatomic, strong) NSString *imageString;
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

@@ -19,6 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    id delegate = [[UIApplication sharedApplication] delegate];
+    _managedObjectContext = [delegate managedObjectContext];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBookToReadingStore)];
     
     _titleLabel.text = _titleString;
