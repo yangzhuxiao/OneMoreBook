@@ -15,7 +15,6 @@
 @property (nonatomic, copy) NSString *authorString;
 @property (nonatomic, strong) NSString *imageString;
 
-
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *authorLabel;

@@ -10,12 +10,11 @@
 #import "IngViewController.h"
 #import "DoubanViewController.h"
 
-@interface AppDelegate ()
-
-@end
-
 @implementation AppDelegate
-            
+
+//@synthesize managedObjectContext = _managedObjectContext;
+//@synthesize managedObjectModel = _managedObjectModel;
+//@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -56,6 +55,66 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [self saveContext]; //really must be here???
+}
+
+- (void)saveContext
+{
+    NSError *error = nil;
+    if (_managedObjectContext) {
+        if (![_managedObjectContext save:&error] && [_managedObjectContext hasChanges]) {
+            NSLog(@"Unsolved Error: %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+#pragma mark - core data stack
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext){
+        return _managedObjectContext;
+    }
+    
+    if (_persistentStoreCoordinator) {
+        [_managedObjectContext setPersistentStoreCoordinator:_persistentStoreCoordinator];
+    }
+    return _managedObjectContext;
+}
+
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (_managedObjectModel) {
+        return _managedObjectModel;
+    }
+    
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"OneMoreBook" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (_persistentStoreCoordinator) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OneMoreBook.sqlite"];
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        NSLog(@"Unsolved Error: %@, %@", error, [error userInfo]);
+    }
+    return _persistentStoreCoordinator;
+}
+
+#pragma mark - applicationDocumentsDirectory
+
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 @end
