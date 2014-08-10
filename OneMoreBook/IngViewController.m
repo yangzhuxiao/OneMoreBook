@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 Xiaozhu. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "IngViewController.h"
 #import "SearchViaDoubanAPI.h"
 #import "DoubanHeaders.h"
@@ -25,6 +26,16 @@
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchDisplayController:shouldReloadTableForSearchString:)];
     _searchedBooks = [NSMutableArray array];
     _selectedBook = [[BookInfo alloc] init];
+    
+    id delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [delegate managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Book"];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    NSError *error = nil;
+    _fetchedSuccessfully = [_fetchedResultsController performFetch:&error];
 }
 
 - (void)searchByKeyword:(NSString *)searchString
@@ -39,7 +50,7 @@
 
 - (void)pushViewControllerAtIndex:(NSInteger)index
 {
-    _searchedBooks = [_searchedBooks objectAtIndex:index];
+    _selectedBook = [_searchedBooks objectAtIndex:index];
     BookDetailViewController *detailViewController = [[BookDetailViewController alloc] init];
     
     detailViewController.titleString = _selectedBook.bookTitle;
@@ -53,7 +64,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        return 1;
+    }
+    else return [[_fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -61,7 +75,12 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return [_searchedBooks count];
     }
-    else return [_savedBooks count];
+    else if ([[_fetchedResultsController sections] count] > 0)
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+        return [sectionInfo numberOfObjects];
+    }
+    else return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,6 +95,7 @@
         cell = [[CustomCell alloc] init];
     }
     
+    NSString *authorPref = @"作者：";
     BookInfo *newBook = [[BookInfo alloc] init];
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -86,7 +106,6 @@
         //不能用objectAtIndex:因为若bookAuthorArray为empty时会报错！！！
         //    NSString *author1 = [bookAuthorArray objectAtIndex:0];
         NSString *authorAll = [bookAuthorArray componentsJoinedByString:@" "];
-        NSString *authorPref = @"作者：";
         cell.bookAuthor.text = [authorPref stringByAppendingString:authorAll];
         NSString *imagePath = [newBook valueForKey:@"bookImage"];
         //方式一：Ios自己的类来实现
@@ -98,9 +117,13 @@
          [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
          */
     }
-    else
+    else if (_fetchedSuccessfully)
     {
-        
+        NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
+        cell.bookTitle.text = [managedObject valueForKey:@"title"];
+        cell.bookAuthor.text = [authorPref stringByAppendingString:[managedObject valueForKey:@"author"]];
+        NSData *imageData = [managedObject valueForKey:@"image"];
+        cell.bookImage.image = [UIImage imageWithData:imageData];
     }
     return cell;
 }
