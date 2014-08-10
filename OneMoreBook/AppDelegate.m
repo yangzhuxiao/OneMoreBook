@@ -78,8 +78,10 @@
         return _managedObjectContext;
     }
     
-    if (_persistentStoreCoordinator) {
-        [_managedObjectContext setPersistentStoreCoordinator:_persistentStoreCoordinator];
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator) {
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return _managedObjectContext;
 }
@@ -103,7 +105,7 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OneMoreBook.sqlite"];
     NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];//此处不能用_managedObjectModel，首次调用时还为nil
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         NSLog(@"Unsolved Error: %@, %@", error, [error userInfo]);
     }

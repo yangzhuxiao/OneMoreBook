@@ -158,7 +158,6 @@
 			children = (
 				9708692E1993CCA900009AA8 /* BookInfo.h */,
 				9708692F1993CCA900009AA8 /* BookInfo.m */,
-				971FE0D71996439800E10C1D /* OneMoreBook.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -196,6 +195,7 @@
 				971FE0D1199640B200E10C1D /* Douban */,
 				9752DE491982596B00407F5B /* Images.xcassets */,
 				9752DE421982596B00407F5B /* Supporting Files */,
+				971FE0D71996439800E10C1D /* OneMoreBook.xcdatamodeld */,
 			);
 			path = OneMoreBook;
 			sourceTree = "<group>";
