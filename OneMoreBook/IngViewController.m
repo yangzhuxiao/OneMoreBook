@@ -27,6 +27,22 @@
     _selectedBook = [[BookInfo alloc] init];
 }
 
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:YES];
+//    if (_searchDisplayController.active == NO) {
+//        [_searchDisplayController setActive:YES animated:YES];
+//    }
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:YES];
+//    if (_searchDisplayController.active == YES) {
+//        [_searchDisplayController setActive:NO animated:YES];
+//    }
+//}
+
 - (void)searchByKeyword:(NSString *)searchString
 {
     [SearchViaDoubanAPI searchBook:searchString WithResults:^(NSArray *resultsArray) {
@@ -102,6 +118,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.searchDisplayController.searchBar resignFirstResponder];//目的为了点击隐藏键盘
     [self pushViewControllerAtIndex:indexPath.row];
 }
 #pragma mark - UISearchDisplayDelegate medhods
@@ -110,7 +127,6 @@
 {
     NSString *pref = [NSString stringWithFormat:@"%@?apikey=%@&q=", kSearchURL, kAPIKey];
     searchString = [pref stringByAppendingString:searchString];
-    //   searchString =@"https://api.douban.com/v2/book/search?apikey=0071e999e5b2c9100155bccdb1185b30&q=we";
     [self searchByKeyword:searchString];
     return YES;
 }
