@@ -27,22 +27,6 @@
     _selectedBook = [[BookInfo alloc] init];
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:YES];
-//    if (_searchDisplayController.active == NO) {
-//        [_searchDisplayController setActive:YES animated:YES];
-//    }
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:YES];
-//    if (_searchDisplayController.active == YES) {
-//        [_searchDisplayController setActive:NO animated:YES];
-//    }
-//}
-
 - (void)searchByKeyword:(NSString *)searchString
 {
     [SearchViaDoubanAPI searchBook:searchString WithResults:^(NSArray *resultsArray) {
@@ -74,7 +58,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_searchedBooks count];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [_searchedBooks count];
+    }
+    else return [_savedBooks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,24 +77,31 @@
     }
     
     BookInfo *newBook = [[BookInfo alloc] init];
-    newBook = [_searchedBooks objectAtIndex:indexPath.row];
     
-    cell.bookTitle.text = [newBook valueForKey:@"bookTitle"];
-    NSArray *bookAuthorArray = [newBook valueForKey:@"bookAuthor"];
-    //不能用objectAtIndex:因为若bookAuthorArray为empty时会报错！！！
-//    NSString *author1 = [bookAuthorArray objectAtIndex:0];
-    NSString *authorAll = [bookAuthorArray componentsJoinedByString:@" "];
-    NSString *authorPref = @"作者：";
-    cell.bookAuthor.text = [authorPref stringByAppendingString:authorAll];
-    NSString *imagePath = [newBook valueForKey:@"bookImage"];
-    //方式一：Ios自己的类来实现
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]];
-    cell.bookImage.image = [UIImage imageWithData:data];
-    
-/*  //方式二：restkit中AFNetworking库中的方法
-    NSURL *imageURL = [NSURL URLWithString:imagePath];
-    [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
-*/
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        newBook = [_searchedBooks objectAtIndex:indexPath.row];
+        
+        cell.bookTitle.text = [newBook valueForKey:@"bookTitle"];
+        NSArray *bookAuthorArray = [newBook valueForKey:@"bookAuthor"];
+        //不能用objectAtIndex:因为若bookAuthorArray为empty时会报错！！！
+        //    NSString *author1 = [bookAuthorArray objectAtIndex:0];
+        NSString *authorAll = [bookAuthorArray componentsJoinedByString:@" "];
+        NSString *authorPref = @"作者：";
+        cell.bookAuthor.text = [authorPref stringByAppendingString:authorAll];
+        NSString *imagePath = [newBook valueForKey:@"bookImage"];
+        //方式一：Ios自己的类来实现
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]];
+        cell.bookImage.image = [UIImage imageWithData:data];
+        
+        /*  //方式二：restkit中AFNetworking库中的方法
+         NSURL *imageURL = [NSURL URLWithString:imagePath];
+         [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
+         */
+    }
+    else
+    {
+        
+    }
     return cell;
 }
 
