@@ -11,7 +11,9 @@
 
 @interface IngViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
 
-@property (nonatomic, copy) NSMutableArray *booksArray;
+@property (nonatomic, copy) NSMutableArray *searchedBooks;
+@property (nonatomic, copy) NSMutableArray *savedBooks;
+
 @property (nonatomic, strong) BookInfo *selectedBook;
 
 @end

@@ -23,7 +23,7 @@
     
     //TO BE DONE...
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchDisplayController:shouldReloadTableForSearchString:)];
-    _booksArray = [NSMutableArray array];
+    _searchedBooks = [NSMutableArray array];
     _selectedBook = [[BookInfo alloc] init];
 }
 
@@ -47,7 +47,7 @@
 {
     [SearchViaDoubanAPI searchBook:searchString WithResults:^(NSArray *resultsArray) {
         for (BookInfo *book in resultsArray){
-            [_booksArray addObject:book];
+            [_searchedBooks addObject:book];
         }
         [self.searchDisplayController.searchResultsTableView reloadData];
     }];
@@ -55,7 +55,7 @@
 
 - (void)pushViewControllerAtIndex:(NSInteger)index
 {
-    _selectedBook = [_booksArray objectAtIndex:index];
+    _searchedBooks = [_searchedBooks objectAtIndex:index];
     BookDetailViewController *detailViewController = [[BookDetailViewController alloc] init];
     
     detailViewController.titleString = _selectedBook.bookTitle;
@@ -74,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_booksArray count];
+    return [_searchedBooks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,7 +90,7 @@
     }
     
     BookInfo *newBook = [[BookInfo alloc] init];
-    newBook = [_booksArray objectAtIndex:indexPath.row];
+    newBook = [_searchedBooks objectAtIndex:indexPath.row];
     
     cell.bookTitle.text = [newBook valueForKey:@"bookTitle"];
     NSArray *bookAuthorArray = [newBook valueForKey:@"bookAuthor"];
