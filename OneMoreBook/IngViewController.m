@@ -48,14 +48,13 @@
     }];
 }
 
-- (void)pushViewControllerAtIndex:(NSInteger)index
+- (void)pushViewControllerWithBookTitle:(NSString *)title bookAuthor:(NSString *)author bookImage:(NSData *)image
 {
-    _selectedBook = [_searchedBooks objectAtIndex:index];
     BookDetailViewController *detailViewController = [[BookDetailViewController alloc] init];
     
-    detailViewController.titleString = _selectedBook.bookTitle;
-    detailViewController.authorString = [_selectedBook.bookAuthor componentsJoinedByString:@" "];
-    detailViewController.imageString = _selectedBook.bookImage;
+    detailViewController.bookTitle = title;
+    detailViewController.bookAuthor = author;
+    detailViewController.bookImage = image;
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
@@ -103,19 +102,12 @@
         
         cell.bookTitle.text = [newBook valueForKey:@"bookTitle"];
         NSArray *bookAuthorArray = [newBook valueForKey:@"bookAuthor"];
-        //不能用objectAtIndex:因为若bookAuthorArray为empty时会报错！！！
-        //    NSString *author1 = [bookAuthorArray objectAtIndex:0];
         NSString *authorAll = [bookAuthorArray componentsJoinedByString:@" "];
         cell.bookAuthor.text = [authorPref stringByAppendingString:authorAll];
         NSString *imagePath = [newBook valueForKey:@"bookImage"];
-        //方式一：Ios自己的类来实现
+
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]];
         cell.bookImage.image = [UIImage imageWithData:data];
-        
-        /*  //方式二：restkit中AFNetworking库中的方法
-         NSURL *imageURL = [NSURL URLWithString:imagePath];
-         [cell.bookImage setImageWithURL:imageURL placeholderImage:nil];
-         */
     }
     else if (_fetchedSuccessfully)
     {
@@ -135,8 +127,25 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.searchDisplayController.searchBar resignFirstResponder];//目的为了点击隐藏键盘
-    [self pushViewControllerAtIndex:indexPath.row];
+    NSString *title;
+    NSString *author;
+    NSData *image;
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        [self.searchDisplayController.searchBar resignFirstResponder];//目的为了点击隐藏键盘
+        _selectedBook = [_searchedBooks objectAtIndex:indexPath.row];
+        title = _selectedBook.bookTitle;
+        author = [_selectedBook.bookAuthor componentsJoinedByString:@" "];
+        image = [NSData dataWithContentsOfURL:[NSURL URLWithString:_selectedBook.bookImage]];
+    }
+    else
+    {
+        NSManagedObject *managedObject = [_fetchedResultsController objectAtIndexPath:indexPath];
+        title = [managedObject valueForKey:@"title"];
+        author = [managedObject valueForKey:@"author"];
+        image = [managedObject valueForKey:@"image"];
+    }
+    [self pushViewControllerWithBookTitle:title bookAuthor:author bookImage:image];
 }
 #pragma mark - UISearchDisplayDelegate medhods
 

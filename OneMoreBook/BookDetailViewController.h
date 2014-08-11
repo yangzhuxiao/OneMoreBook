@@ -11,9 +11,9 @@
 
 @interface BookDetailViewController : UIViewController
 
-@property (nonatomic, copy) NSString *titleString;
-@property (nonatomic, copy) NSString *authorString;
-@property (nonatomic, strong) NSString *imageString;
+@property (nonatomic, copy) NSString *bookTitle;
+@property (nonatomic, copy) NSString *bookAuthor;
+@property (nonatomic, strong) NSData *bookImage;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

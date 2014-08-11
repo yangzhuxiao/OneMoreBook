@@ -23,11 +23,9 @@
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBookToReadingStore)];
     
-    _titleLabel.text = _titleString;
-    _authorLabel.text = _authorString;
-
-    NSURL *imageURL = [NSURL URLWithString:_imageString];
-    [_imageView setImageWithURL:imageURL placeholderImage:nil];
+    _titleLabel.text = _bookTitle;
+    _authorLabel.text = _bookAuthor;
+    _imageView.image = [UIImage imageWithData:_bookImage];
 }
 
 - (void)addBookToReadingStore
@@ -36,10 +34,9 @@
     NSManagedObjectContext *context = [delegate managedObjectContext];
     
     NSManagedObject *newObject = [NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:context];
-    [newObject setValue:_titleString forKey:@"title"];
-    [newObject setValue:_authorString forKey:@"author"];
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:_imageString]];
-    [newObject setValue:imageData forKey:@"image"];
+    [newObject setValue:_bookTitle forKey:@"title"];
+    [newObject setValue:_bookAuthor forKey:@"author"];
+    [newObject setValue:_bookImage forKey:@"image"];
     
     [delegate saveContext];
 }
