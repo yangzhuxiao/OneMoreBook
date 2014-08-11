@@ -147,6 +147,7 @@
     }
     [self pushViewControllerWithBookTitle:title bookAuthor:author bookImage:image];
 }
+
 #pragma mark - UISearchDisplayDelegate medhods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
