@@ -64,6 +64,8 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.searchDisplayController.searchResultsTableView){
+        [tableView setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+44, self.view.frame.size.width, self.view.frame.size.height-44)];
+//        self.view.frame.origin.x, self.view.frame.origin.y+44, self.view.frame.size.width, self.view.frame.size.height-44
         return 1;
     }
     else return [[_fetchedResultsController sections] count];
@@ -96,7 +98,7 @@
     
     NSString *authorPref = @"作者：";
     BookInfo *newBook = [[BookInfo alloc] init];
-    
+
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         newBook = [_searchedBooks objectAtIndex:indexPath.row];
         
@@ -148,7 +150,7 @@
     [self pushViewControllerWithBookTitle:title bookAuthor:author bookImage:image];
 }
 
-#pragma mark - UISearchDisplayDelegate medhods
+#pragma mark - UISearchDisplayDelegate methods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
@@ -157,4 +159,12 @@
     [self searchByKeyword:searchString];
     return YES;
 }
+
+#pragma mark - UISearchBarDelegate methods
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"cancel button clicked...");
+}
+
 @end

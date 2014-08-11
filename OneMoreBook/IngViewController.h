@@ -10,7 +10,7 @@
 #import "BookInfo.h"
 #import <CoreData/CoreData.h>
 
-@interface IngViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
+@interface IngViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, copy) NSMutableArray *searchedBooks;
 
